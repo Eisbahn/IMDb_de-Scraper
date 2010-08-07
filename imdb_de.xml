@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?><scraper framework="1.1" date="2010-07-11" name="DE_IMDb_v2.0.0" content="movies" thumb="imdb_de.png" language="de">
+﻿<?xml version="1.0" encoding="utf-8"?><scraper framework="1.1" date="2010-07-12" name="DE_IMDb_v2.0.1" content="movies" thumb="icon.png" language="de">
 	<!-- IMDB Scraper von R. Merkel, aktuelle Version und Infos auf http://eisbahn.ohost.de/ -->
 	<GetSettings dest="3">
 		<RegExp input="$$5" output="&lt;settings&gt;\1&lt;/settings&gt;" dest="3">
