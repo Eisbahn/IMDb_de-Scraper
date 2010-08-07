@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <settings>
-	<setting label="1000" type="labelenum" values="info" id="updateinfo" default="info"/>
 	<setting label="1001" type="bool" id="getallgenre" default="true"/>
-	<setting label="1002" type="bool" id="fullcredits" default="true"/>
+	<setting label="1002" type="bool" id="fullcredits" default="false"/>
 	<setting label="1003" type="bool" id="fanart" default="true"/>
 	<setting label="1004" type="bool" id="tmdbthumbs" default="true"/>
 	<setting label="1005" type="bool" id="movieposterdb" default="true"/>

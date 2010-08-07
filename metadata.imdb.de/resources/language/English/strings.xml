@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <strings>
-	<string id="1000">Updates/Infos: http://eisbahn.ohost.de/</string>
 	<string id="1001">import more than the first two genres</string>
 	<string id="1002">add infos for all actors/artists</string>
 	<string id="1003">enable fanart from TMDB</string>
