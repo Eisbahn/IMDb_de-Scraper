@@ -1,0 +1,20 @@
+[B]1.1.1[/B]
+- added more options to control what should be scraped
+
+[B]1.1.0[/B]
+- corrected import of thumbs with preview
+
+[B]1.0.2[/B]
+- import of runtime corrected
+- import of mpaa for germany and certification for all other countries
+
+[B]1.0.1[/B]
+- importing of year corrected if quarter is given (e.g. "Insomnia (2002)")
+- option for importing two or all genres
+- trimming of whitespaces at beginning and end of plot
+
+[B]1.0.0[/B]
+- first try of importing all known tags
+
+[B]0.0.1[/B]
+- initial version for XBMC v9.x (Camelot)
