@@ -1,14 +1,11 @@
-﻿<?xml version="1.0" encoding="utf-8"?><scraper framework="1.1" date="2010-07-12" name="DE_IMDb_v2.0.1" content="movies" thumb="icon.png" language="de">
+﻿<?xml version="1.0" encoding="utf-8"?><scraper framework="11" date="2010-08-02" name="DE_IMDb_v2.0.2" content="movies" thumb="icon.png" language="de">
 	<!-- IMDB Scraper von R. Merkel, aktuelle Version und Infos auf http://eisbahn.ohost.de/ -->
 	<GetSettings dest="3">
 		<RegExp input="$$5" output="&lt;settings&gt;\1&lt;/settings&gt;" dest="3">
-			<RegExp input="$$1" output="&lt;setting label=&quot;Updates/Infos unter http://eisbahn.ohost.de/ (keine Auswertung dieser Option)&quot; type=&quot;bool&quot; id=&quot;updateinfo&quot; default=&quot;false&quot;&gt;&lt;/setting&gt;" dest="5">
-				<expression noclean="1" />
-			</RegExp>
 			<RegExp input="$$1" output="&lt;setting label=&quot;mehr als die ersten beiden Genre/Kategorisierungen importieren&quot; type=&quot;bool&quot; id=&quot;getallgenre&quot; default=&quot;true&quot;&gt;&lt;/setting&gt;" dest="5+">
 				<expression />
 			</RegExp>
-			<RegExp input="$$1" output="&lt;setting label=&quot;Infos zu allen am Film beteiligten anfügen&quot; type=&quot;bool&quot; id=&quot;fullcredits&quot; default=&quot;true&quot;&gt;&lt;/setting&gt;" dest="5+">
+			<RegExp input="$$1" output="&lt;setting label=&quot;Infos zu allen am Film beteiligten anfügen&quot; type=&quot;bool&quot; id=&quot;fullcredits&quot; default=&quot;false&quot;&gt;&lt;/setting&gt;" dest="5+">
 				<expression />
 			</RegExp>
 			<RegExp input="$$1" output="&lt;setting label=&quot;Fanart von TMDB aktivieren&quot; type=&quot;bool&quot; id=&quot;fanart&quot; default=&quot;true&quot;&gt;&lt;/setting&gt;" dest="5+">
@@ -24,6 +21,9 @@
 				<expression />
 			</RegExp>
 			<RegExp input="$$1" output="&lt;setting label=&quot;Handlung von OFDB abfragen wenn IMDB keine enthält&quot; type=&quot;bool&quot; id=&quot;getofdbplot&quot; default=&quot;true&quot;&gt;&lt;/setting&gt;" dest="5+">
+				<expression />
+			</RegExp>
+			<RegExp input="$$1" output="&lt;setting label=&quot;den Filmtitel von OFDB verwenden&quot; type=&quot;bool&quot; id=&quot;getofdbtitel&quot; default=&quot;false&quot;&gt;&lt;/setting&gt;" dest="5+">
 				<expression />
 			</RegExp>
 			<expression noclean="1" />
@@ -63,7 +63,7 @@
 		</RegExp>
 	</GetSearchResults>
 	<!-- verwendete Puffer: 1 = HTML Download, 2 = ttID (IMDB-ID), 3 = http://www.imdb.de/title/tt ID (URL + IMDB-ID), 4 = Ergebnis -> GetDetails Ergebnis, 5 = Temp/Puffer -->
-	<GetDetails clearbuffers="no" dest="4">
+	<GetDetails dest="4">
 		<RegExp input="$$4" output="&lt;details&gt;\1&lt;/details&gt;" dest="4">
 			<!--IMDB ID-->
 			<RegExp input="" output="&lt;id&gt;$$2&lt;/id&gt;" dest="4">
@@ -189,7 +189,7 @@
 		</RegExp>
 	</GetDetails>
 	<!-- verwendete Puffer: 1 = HTML Download, 2 = ttID (IMDB-ID), 5 = Temp/Puffer, 6 = Ergebnis -->
-	<GetIMDBPlot clearbuffers="no" dest="6">
+	<GetIMDBPlot dest="6">
 		<!--ausführliche Handlung zum Film-->
 		<RegExp input="$$5" output="&lt;details&gt;\1&lt;/details&gt;" dest="6">
 			<!--IMDB ID-->
@@ -198,11 +198,11 @@
 			</RegExp>
 			<!--ausführliche Handlung 1/2-->
 			<RegExp input="$$1" output="\1" dest="5">
-				<expression clear="yes">&lt;div id="swiki.2.1"&gt;\n\n([^\n]+)</expression>
+				<expression>&lt;div id="swiki.2.1"&gt;\n\n([^\n]+)</expression>
 			</RegExp>
 			<!--ausführliche Handlung 2/2-->
 			<RegExp input="$$5" output="&lt;plot&gt;\1&lt;/plot&gt;" dest="5">
-				<expression>(.+)</expression>
+				<expression clear="yes">(.+)</expression>
 			</RegExp>
 			<!--wenn in den vorherigen RegEx keine ausführliche Handlung gefunden wurde, auf Wunsch OFDB abfragen-->
 			<RegExp conditional="getofdbplot" input="$$5" output="&lt;url function=&quot;GetOFDBLink&quot;&gt;http://www.ofdb.de/view.php?SText=$$2&amp;Kat=IMDb&amp;page=suchergebnis&lt;/url&gt;" dest="5">
@@ -212,7 +212,7 @@
 		</RegExp>
 	</GetIMDBPlot>
 	<!-- verwendete Puffer: 1 = HTML Download, 5 = Temp/Puffer, 6 = Ergebnis, 7 = Puffer GetIMDBCast -->
-	<GetIMDBCast clearbuffers="no" dest="6">
+	<GetIMDBCast dest="6">
 		<!--Infos zu den Schauspielern abfragen-->
 		<RegExp input="$$7" output="&lt;details&gt;\1&lt;/details&gt;" dest="6">
 			<RegExp input="$$1" output="\1" dest="5">
@@ -228,7 +228,7 @@
 		</RegExp>
 	</GetIMDBCast>
 	<!-- verwendete Puffer: 1 = HTML Download, 5 = Temp/Puffer, 6 = Ergebnis, 8 = Puffer GetIMDBDirectors -->
-	<GetIMDBDirectors clearbuffers="no" dest="6">
+	<GetIMDBDirectors dest="6">
 		<!--Infos zu den Filmregisseuren abfragen-->
 		<RegExp input="$$8" output="&lt;details&gt;\1&lt;/details&gt;" dest="6">
 			<RegExp conditional="!fullcredits" input="$$1" output="\1" dest="5">
@@ -240,11 +240,11 @@
 			<RegExp input="$$5" output="&lt;director&gt;\1&lt;/director&gt;" dest="8+">
 				<expression repeat="yes" clear="yes">&lt;a href="/name/[^&gt;]*&gt;([^&lt;]*)&lt;</expression>
 			</RegExp>
-			<expression noclean="1" />
+			<expression clear="yes" noclean="1" />
 		</RegExp>
 	</GetIMDBDirectors>
 	<!-- verwendete Puffer: 1 = HTML Download, 5 = Temp/Puffer, 6 = Ergebnis, 9 = Puffer GetIMDBWriters -->
-	<GetIMDBWriters clearbuffers="no" dest="6">
+	<GetIMDBWriters dest="6">
 		<!--Infos zu den Drehbuchautoren abfragen-->
 		<RegExp input="$$9" output="&lt;details&gt;\1&lt;/details&gt;" dest="6">
 			<RegExp conditional="!fullcredits" input="$$1" output="\1" dest="5">
@@ -260,36 +260,36 @@
 		</RegExp>
 	</GetIMDBWriters>
 	<!-- verwendete Puffer: 1 = HTML Download, 5 = Temp/Puffer, 6 = Ergebnis -->
-	<GetIMDBThumbs clearbuffers="no" dest="6">
+	<GetIMDBThumbs dest="6">
 		<!--Bilder/Thumbnails von IMDB-->
 		<RegExp input="$$5" output="&lt;details&gt;\1&lt;/details&gt;" dest="6">
 			<RegExp input="$$1" output="\1_SX$INFO[imdbscale]_SY$INFO[imdbscale]_\2" dest="5">
 				<expression repeat="yes" noclean="1,2">&lt;img alt="" height="100" width="100"  src="(.*?)_S.*?(.jpg)"</expression>
 			</RegExp>
 			<RegExp input="$$5" output="&lt;thumb&gt;\1&lt;/thumb&gt;" dest="5">
-				<expression repeat="yes" noclean="1">(.*?_SX[0-9]+_SY[0-9]+_.jpg)</expression>
+				<expression repeat="yes" clear="yes" noclean="1">(.*?_SX[0-9]+_SY[0-9]+_.jpg)</expression>
 			</RegExp>
 			<expression noclean="1" />
 		</RegExp>
 	</GetIMDBThumbs>
 	<!-- verwendete Puffer: 1 = HTML Download, 5 = Temp/Puffer, 6 = Ergebnis -->
-	<GetTMDBThumbs clearbuffers="no" dest="6">
+	<GetTMDBThumbs dest="6">
 		<!--Poster von TMDB-->
 		<RegExp input="$$5" output="&lt;details&gt;\1&lt;/details&gt;" dest="6">
 			<RegExp input="$$1" output="&lt;thumb&gt;\1&lt;/thumb&gt;" dest="5">
 				<expression repeat="yes" noclean="1">&lt;poster[^&gt;]*&gt;(.*?)&lt;/poster&gt;</expression>
 			</RegExp>
 			<RegExp input="$$5" output="&lt;thumb preview=&quot;\2&quot;&gt;\1\3&lt;/thumb&gt;" dest="5">
-				<expression repeat="yes" noclean="1,3">&lt;thumb&gt;(.*?)url="([^"]*)" size="mid"(.*?)&lt;/thumb&gt;</expression>
+				<expression repeat="yes" clear="yes" noclean="1,3">&lt;thumb&gt;(.*?)url="([^"]*)" size="mid"(.*?)&lt;/thumb&gt;</expression>
 			</RegExp>
 			<RegExp input="$$5" output="&lt;thumb\1&gt;\2&lt;/thumb&gt;" dest="5">
-				<expression repeat="yes" noclean="1">&lt;thumb([^&gt;]*)&gt;.*?url="([^"]*)" size="original".*?&lt;/thumb&gt;</expression>
+				<expression repeat="yes" clear="yes" noclean="1">&lt;thumb([^&gt;]*)&gt;.*?url="([^"]*)" size="original".*?&lt;/thumb&gt;</expression>
 			</RegExp>
 			<expression noclean="1" />
 		</RegExp>
 	</GetTMDBThumbs>
 	<!-- verwendete Puffer: 1 = HTML Download, 5 = Temp/Puffer, 6 = Ergebnis -->
-	<GetTMDBFanart clearbuffers="no" dest="6">
+	<GetTMDBFanart dest="6">
 		<!--Fanart von TMDB-->
 		<RegExp input="$$5" output="&lt;details&gt;&lt;fanart&gt;\1&lt;/fanart&gt;&lt;/details&gt;" dest="6">
 			<RegExp input="$$1" output="&lt;thumb&gt;\1&lt;/thumb&gt;" dest="5">
@@ -305,14 +305,14 @@
 		</RegExp>
 	</GetTMDBFanart>
 	<!-- verwendete Puffer: 1 = HTML Download, 6 = Ergebnis -->
-	<GetMoviePosterDBLink clearbuffers="no" dest="6">
+	<GetMoviePosterDBLink dest="6">
 		<!--Link zum Film bei Movieposter DB bestimmen und abfragen-->
 		<RegExp input="$$1" output="&lt;details&gt;&lt;url function=&quot;GetMoviePosterDBThumbs&quot;&gt;\1&lt;/url&gt;&lt;/details&gt;" dest="6">
 			<expression>(http://www.movieposterdb.com/movie/[^"]*)"</expression>
 		</RegExp>
 	</GetMoviePosterDBLink>
 	<!-- verwendete Puffer: 1 = HTML Download, 5 = Temp/Puffer, 6 = Ergebnis -->
-	<GetMoviePosterDBThumbs clearbuffers="no" dest="6">
+	<GetMoviePosterDBThumbs dest="6">
 		<!--Poster/Bilder von Movieposter DB-->
 		<RegExp input="$$5" output="&lt;details&gt;\1&lt;/details&gt;" dest="6">
 			<RegExp input="$$1" output="&lt;thumb&gt;\1l_\2&lt;/thumb&gt;" dest="5">
@@ -321,15 +321,23 @@
 			<expression noclean="1" />
 		</RegExp>
 	</GetMoviePosterDBThumbs>
-	<!-- verwendete Puffer: 1 = HTML Download, 6 = Ergebnis -->
-	<GetOFDBLink clearbuffers="no" dest="6">
-		<!--Link zum Film bei OFDB abfragen-->
-		<RegExp input="$$1" output="&lt;details&gt;&lt;url function=&quot;GetOFDBOutTagline&quot;&gt;http://www.ofdb.de/\1&lt;/url&gt;&lt;/details&gt;" dest="6">
-			<expression>&lt;br&gt;1. &lt;a href=".*?([^"]+)</expression>
+	<!-- verwendete Puffer: 1 = HTML Download, 5 = Temp/Puffer, 6 = Ergebnis -->
+	<GetOFDBLink dest="6">
+		<!--Link zum Film bei OFDB liefern (entweder leer, oder Link zum Film)-->
+		<RegExp input="" output="&lt;details&gt;$$5&lt;/details&gt;" dest="6">
+			<!--Link zum Film bei OFDB abfragen-->
+			<RegExp input="$$1" output="\1" dest="5">
+				<expression>&lt;br&gt;1. &lt;a href=".*?([^"]+)</expression>
+			</RegExp>
+			<!--wenn Link vorhanden, Abfrage zusammenstellen-->
+			<RegExp input="$$5" output="&lt;url function=&quot;GetOFDBOutTaglineTitle&quot;&gt;http://www.ofdb.de/\1&lt;/url&gt;" dest="5">
+				<expression clear="yes">(.+)</expression>
+			</RegExp>
+			<expression />
 		</RegExp>
 	</GetOFDBLink>
 	<!-- verwendete Puffer: 1 = HTML Download, 5 = Temp/Puffer, 6 = Ergebnis -->
-	<GetOFDBOutTagline clearbuffers="no" dest="6">
+	<GetOFDBOutTaglineTitle dest="6">
 		<!--Abriss/Kurzinhalt und Handlung (sofern weitere Infos zur Verfügung stehen, wird die Handlung später überschrieben/erweitert => GetOFDBPlot)-->
 		<RegExp input="$$5" output="&lt;details&gt;\1&lt;/details&gt;" dest="6">
 			<RegExp input="$$1" output="&lt;outline&gt;\1&lt;/outline&gt;&lt;tagline&gt;\1&lt;/tagline&gt;&lt;plot&gt;\1&lt;/plot&gt;" dest="5">
@@ -338,21 +346,25 @@
 			<RegExp input="$$1" output="&lt;url function=&quot;GetOFDBPlot&quot;&gt;http://www.ofdb.de/plot/\1&lt;/url&gt;" dest="5+">
 				<expression>&lt;a href="plot/([^"]+)</expression>
 			</RegExp>
+			<!--Titel von OFDB bestimmen-->
+			<RegExp conditional="getofdbtitel" input="$$1" output="&lt;title&gt;\1&lt;/title&gt;" dest="5+">
+				<expression>\(IMDb\).+&lt;b&gt;(.+)(?:&lt;/b&gt;&lt;/font&gt;&lt;/h2&gt;)</expression>
+			</RegExp>
 			<expression noclean="1" />
 		</RegExp>
-	</GetOFDBOutTagline>
+	</GetOFDBOutTaglineTitle>
 	<!-- verwendete Puffer: 1 = HTML Download, 5 = Temp/Puffer, 6 = Ergebnis -->
-	<GetOFDBPlot clearbuffers="no" dest="6">
+	<GetOFDBPlot dest="6">
 		<!--ausführliche Handlung zum Film-->
 		<RegExp input="$$5" output="&lt;details&gt;\1&lt;/details&gt;" dest="6">
 			<RegExp input="$$1" output="\1" dest="5">
 				<expression noclean="1">Eine Inhaltsangabe von(.*)Zur &amp;Uuml;bersichtsseite des Films</expression>
 			</RegExp>
 			<RegExp input="$$5" output="\1" dest="5">
-				<expression noclean="1">&lt;br&gt;[^&lt;]+((.|\n)+)(?:&lt;/font&gt;)</expression>
+				<expression clear="yes" noclean="1">&lt;br&gt;[^&lt;]+((.|\n)+)(?:&lt;/font&gt;)</expression>
 			</RegExp>
 			<RegExp input="$$5" output="&lt;plot&gt;\1&lt;/plot&gt;" dest="5">
-				<expression>(.+)</expression>
+				<expression clear="yes">(.+)</expression>
 			</RegExp>
 			<expression noclean="1" />
 		</RegExp>
