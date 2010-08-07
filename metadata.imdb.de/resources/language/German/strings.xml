@@ -8,4 +8,5 @@
 	<string id="1005">Cover/Poster von MoviePosterDB einfügen</string>
 	<string id="1006">IMDb Thumbnailgröße [Pixel]</string>
 	<string id="1007">Handlung von OFDB abfragen wenn IMDB keine enthält</string>
+	<string id="1008">den Filmtitel von OFDB verwenden</string>
 </strings>

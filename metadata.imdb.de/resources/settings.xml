@@ -8,4 +8,5 @@
 	<setting label="1005" type="bool" id="movieposterdb" default="true"/>
 	<setting label="1006" type="labelenum" values="192|256|384|512|1024" id="imdbscale" default="512"/>
 	<setting label="1007" type="bool" id="getofdbplot" default="true"/>
+	<setting label="1008" type="bool" id="getofdbtitel" default="false"/>
 </settings>

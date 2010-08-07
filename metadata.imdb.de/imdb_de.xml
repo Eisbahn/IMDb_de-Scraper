@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?><scraper framework="11" date="2010-07-20" name="" content="movies" language="en">
+﻿<?xml version="1.0" encoding="utf-8"?><scraper framework="11" date="2010-08-02" name="" content="movies" language="en">
 	<!-- IMDB Scraper von R. Merkel, aktuelle Version und Infos auf http://github.com/Eisbahn/IMDb_de-Scraper -->
 	<CreateSearchUrl SearchStringEncoding="utf-8" dest="4">
 		<RegExp input="$$1" output="&lt;url&gt;http://www.imdb.de/find?s=tt;q=\1$$3&lt;/url&gt;" dest="4">
@@ -293,7 +293,7 @@
 		</RegExp>
 	</GetMoviePosterDBThumbs>
 	<!-- verwendete Puffer: 1 = HTML Download, 5 = Temp/Puffer, 6 = Ergebnis -->
-	<GetOFDBLink clearbuffers="no" dest="6">
+	<GetOFDBLink dest="6">
 		<!--Link zum Film bei OFDB liefern (entweder leer, oder Link zum Film)-->
 		<RegExp input="" output="&lt;details&gt;$$5&lt;/details&gt;" dest="6">
 			<!--Link zum Film bei OFDB abfragen-->
@@ -316,6 +316,10 @@
 			</RegExp>
 			<RegExp input="$$1" output="&lt;url function=&quot;GetOFDBPlot&quot;&gt;http://www.ofdb.de/plot/\1&lt;/url&gt;" dest="5+">
 				<expression>&lt;a href="plot/([^"]+)</expression>
+			</RegExp>
+			<!--Titel von OFDB bestimmen-->
+			<RegExp conditional="getofdbtitel" input="$$1" output="&lt;title&gt;\1&lt;/title&gt;" dest="5+">
+				<expression>\(IMDb\).+&lt;b&gt;(.+)(?:&lt;/b&gt;&lt;/font&gt;&lt;/h2&gt;)</expression>
 			</RegExp>
 			<expression noclean="1" />
 		</RegExp>

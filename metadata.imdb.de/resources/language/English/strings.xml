@@ -8,4 +8,5 @@
 	<string id="1005">include cover/poster from MoviePosterDB</string>
 	<string id="1006">size of IMDb Thumbnails [Pixel]</string>
 	<string id="1007">query plot from OFDB if IMDB contains none</string>
+	<string id="1008">use the title from OFDB</string>
 </strings>
