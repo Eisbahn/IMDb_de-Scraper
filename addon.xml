@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addon id="scraper.movies.imdb.de" name="IMDb DE Scraper" version="3.0.0" provider-name="Eisbahn, http://eisbahn.ohost.de/">
+  <requires>
+    <import addon="xbmc.metadata" version="1.0"/>
+  </requires>
+  <extension point="xbmc.metadata.scraper.movies" language="de" library="imdb_de.xml"/>
+  <extension point="xbmc.addon.metadata">
+    <summary lang="de">IMDb.de Film Scraper</summary>
+		<summary lang="en">IMDb.de Movie scraper</summary>
+    <description lang="de">Scraper zu Filmen die in der deutschen IMDb.de gelistet sind mit Abfrage von TMDB, Movieposter und OFDB um weitere Infos und Bilder zu erhalten. Updates und Infos unter http://eisbahn.ohost.de/</description>
+    <description lang="en">Scraper for movies from german IMDb.de with query of TMDB, Movieposter and OFDB for more infos and thumbs. Updates and infos can be found on http://eisbahn.ohost.de/</description>
+    <platform>all</platform>
+  </extension>
+</addon>
