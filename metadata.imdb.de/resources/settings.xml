@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <settings>
+	<setting label="1000" type="text" id="infourl" default="http://github.com/Eisbahn/IMDb_de-Scraper" enable="false"/>
 	<setting label="1001" type="bool" id="getallgenre" default="true"/>
 	<setting label="1002" type="bool" id="fullcredits" default="false"/>
 	<setting label="1003" type="bool" id="fanart" default="true"/>

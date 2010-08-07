@@ -1,8 +1,11 @@
-[B]3.0.2[/B] ()
+[B]3.0.3[/B] (2010-07-24)
 - Links to ohost removed and to github included in all files
 - project hosted on github because of problems with ohost and better integration in XBMC
+- corrected handling of movies without entry (in OFDb) (e.g. "A Gamer's Day" => resulting in tt1606722)
 - corrected cleaning of buffers (resulting in recursive calls, e.g. "White Wall (2010)")
 - changed ID of scraper to metadata.imdb.de
+
+[B]3.0.2[/B] (2010-07-15)
 - changed default setting to import only the first 15 actors from IMDb
 
 [B]3.0.1[/B] (2010-07-12)
@@ -10,12 +13,6 @@
 
 [B]3.0.0[/B] (2010-07-12)
 - initial version for XBMC v10.x (Dharma)
-
-[B]2.0.2[/B] ()
-- Links to ohost removed and to github included in all files
-- project hosted on github because of problems with ohost and better integration in XBMC
-- corrected cleaning of buffers (resulting in recursive calls, e.g. "White Wall (2010)")
-- changed default setting to import only the first 15 actors from IMDb
 
 [B]2.0.1[/B] (2010-07-12)
 - changed the file name of the icon
