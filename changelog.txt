@@ -1,3 +1,8 @@
+[B]2.0.0[/B]
+- rework of complete structure of xml file
+- all known tags are working again
+- ignoring HTML tags in plot of OFDB (e.g. "The Rock - Fels der Entscheidung (1996)")
+
 [B]1.1.1[/B]
 - added more options to control what should be scraped
 
