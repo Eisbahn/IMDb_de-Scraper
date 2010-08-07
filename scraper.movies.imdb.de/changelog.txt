@@ -1,5 +1,11 @@
+[B]3.0.1[/B]
+- changed the dir in the zip for getting the installation via AddOn menu running
+
 [B]3.0.0[/B]
 - initial version for XBMC v10.x (Dharma)
+
+[B]2.0.2[/B]
+- changed default setting to import only the first 15 actors from IMDb
 
 [B]2.0.1[/B]
 - changed the icon
