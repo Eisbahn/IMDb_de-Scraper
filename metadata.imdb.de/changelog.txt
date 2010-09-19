@@ -1,3 +1,12 @@
+[B]3.0.5[/B] (2010-09-19)
+- linebreaks corrected to LF on whole project
+- Headline in imdb_de Scraper file reduced to new Dharma format
+- NfoUrl tag adapted to format from imdb.com Scraper
+- movietitle is now the same as the title for sorting the movies
+- checked and used entities now in every RegEx (changed mostly " to &qout;)
+- support for country infos and corresponding tag
+- use of common functions for TMDB and MoviePoster Queries
+
 [B]3.0.4[/B] (2010-08-07)
 - option to use the title from OFDB added (e.g. Evangelion: 2.0 You Can (Not) Advance results otherwise in Evangerion shin gekijôban: Ha)
 - new icon with better readable URL at the edge
